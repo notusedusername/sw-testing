@@ -1,4 +1,4 @@
-package hu.tigra.pti.geb
+package hu.tigra.pti.geb.page
 
 import geb.Page
 
@@ -9,6 +9,6 @@ class MainPage extends Page {
     static at = { title == 'My Store' }
 
     static content = {
-        loginButton { $('a[class="login"]')}
+        loginButton { $('a[class="login"]') }
     }
 }

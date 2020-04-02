@@ -1,4 +1,4 @@
-package hu.tigra.pti.geb
+package hu.tigra.pti.geb.page
 
 import geb.Page
 
