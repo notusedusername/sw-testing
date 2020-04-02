@@ -1,6 +1,7 @@
 package hu.tigra.pti.geb.page
 
 import geb.Page
+import geb.module.Checkbox
 import geb.module.RadioButtons
 
 class RegisterPage extends Page {
@@ -15,5 +16,8 @@ class RegisterPage extends Page {
         firstName { $('input[id="customer_firstname"]') }
         lastName { $('input[id="customer_lastname"]') }
         password { $('input[id="passwd"]') }
+        newsletter {$('input[type=checkbox][name=newsletter]').module(Checkbox)}
+        optin {$('input[type=checkbox][name=optin]').module(Checkbox)}
+        register {$('#submitAccount')}
     }
 }

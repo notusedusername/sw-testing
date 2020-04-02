@@ -21,8 +21,13 @@ class RegisterSpec extends BaseSpec {
         registerPage.firstName = 'Elek'
         registerPage.lastName = 'Teszt'
         registerPage.password = 'teszt123'
+        registerPage.newsletter.check()
+        registerPage.optin.check()
+        registerPage.register.click()
 
         then: '5 hibaüzenet jelenik meg'
-        true
+        RegisterPage registerPage1 = waitFor { at RegisterPage }
+        registerPage1.$("div.alert.alert-danger p").text() == "There are 5 errors"
+        registerPage1.$("div.alert.alert-danger li").size() == 5
     }
 }
