@@ -21,8 +21,12 @@ class RegisterSpec extends BaseSpec {
         registerPage.firstName = 'Elek'
         registerPage.lastName = 'Teszt'
         registerPage.password = 'teszt123'
+        registerPage.dateOfBirth.value('1990', 'May', '12')
+        registerPage.newsletter.check()
+        registerPage.offers.check()
+        registerPage.registerButton.click()
 
         then: '5 hibaüzenet jelenik meg'
-        true
+        registerPage.errorMessages.values.size() == 5
     }
 }
