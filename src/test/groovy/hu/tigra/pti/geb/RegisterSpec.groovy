@@ -1,6 +1,5 @@
 package hu.tigra.pti.geb
 
-import hu.tigra.pti.geb.module.ErrorMessages
 import hu.tigra.pti.geb.page.LoginPage
 import hu.tigra.pti.geb.page.RegisterPage
 
@@ -22,16 +21,12 @@ class RegisterSpec extends BaseSpec {
         registerPage.firstName = 'Elek'
         registerPage.lastName = 'Teszt'
         registerPage.password = 'teszt123'
-        registerPage.birthDay.selected = '2'
-        registerPage.birthMonth.selected = '2'
-        registerPage.birthYear.selected = '2020'
+        registerPage.dateOfBirth.value('1990', 'May', '12')
         registerPage.newsletter.check()
-        registerPage.optin.check()
-        registerPage.register.click()
+        registerPage.offers.check()
+        registerPage.registerButton.click()
 
         then: '5 hibaüzenet jelenik meg'
-        RegisterPage registerPage1 = waitFor { at RegisterPage }
-        registerPage1.$("div.alert.alert-danger p").text() == "There are 5 errors"
-        registerPage1.$("div.alert.alert-danger li").size() == 5
+        registerPage.errorMessages.values.size() == 5
     }
 }
