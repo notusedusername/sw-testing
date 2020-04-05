@@ -1,5 +1,6 @@
 package hu.tigra.pti.geb
 
+import hu.tigra.pti.geb.module.ErrorMessages
 import hu.tigra.pti.geb.page.LoginPage
 import hu.tigra.pti.geb.page.RegisterPage
 
@@ -21,6 +22,9 @@ class RegisterSpec extends BaseSpec {
         registerPage.firstName = 'Elek'
         registerPage.lastName = 'Teszt'
         registerPage.password = 'teszt123'
+        registerPage.birthDay.selected = '2'
+        registerPage.birthMonth.selected = '2'
+        registerPage.birthYear.selected = '2020'
         registerPage.newsletter.check()
         registerPage.optin.check()
         registerPage.register.click()
