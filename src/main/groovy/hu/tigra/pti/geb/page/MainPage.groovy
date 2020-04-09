@@ -1,6 +1,7 @@
 package hu.tigra.pti.geb.page
 
 import geb.Page
+import hu.tigra.pti.geb.module.ProductCard
 
 class MainPage extends Page {
 
@@ -10,5 +11,6 @@ class MainPage extends Page {
 
     static content = {
         loginButton { $('a[class="login"]') }
+        products { $('ul[id="homefeatured"]').find('li').collect { li -> li.module ProductCard } }
     }
 }

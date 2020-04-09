@@ -30,6 +30,23 @@ class RegisterSpec extends BaseSpec {
 
         then: '5 hibaüzenet jelenik meg'
         registerPage.errorMessages.values.size() == 5
+
+        when: 'Kitöltöm a "Your address" blokkban az összes mezőt és "Register" funkciógombra kattintok.'
+        registerPage.password = 'teszt123'
+        registerPage.company = 'Az én cégem kft'
+        registerPage.address = 'zöld utca 42.'
+        registerPage.city = 'Pirosváros'
+        registerPage.state = 'Florida'
+        registerPage.postalCode = '12345'
+        registerPage.other = 'Valami nagyon fontos információ...'
+        registerPage.phone = '06123456789'
+        registerPage.mobilePhone = '06987654321'
+        registerPage.alias = 'Az én kicsi címem'
+        registerPage.registerButton.click()
+
+        then: 'Megjelenik a felhasználó adatai felület: "My account".'
+        def myAccountPage = waitFor { at MyAccountPage }
+        myAccountPage.header.text() == "MY ACCOUNT"
     }
 
 
