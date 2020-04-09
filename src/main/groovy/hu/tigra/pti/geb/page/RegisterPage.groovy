@@ -21,6 +21,15 @@ class RegisterPage extends Page {
         dateOfBirth { module(Date) }
         newsletter { $('input[id="newsletter"]').module(Checkbox) }
         offers { $('input[id="optin"]').module(Checkbox) }
+        company { $('input[id="company"]') }
+        address { $('input[id="address1"]') }
+        city { $('input[id="city"]') }
+        state { $('select[id="id_state"]') }
+        postalCode { $('input[id="postcode"]') }
+        other { $('textarea[id="other"]') }
+        phone { $('input[id="phone"]') }
+        mobilePhone { $('input[id="phone_mobile"]') }
+        alias { $('input[id="alias"]') }
         registerButton { $('button[id="submitAccount"]') }
         errorMessages(required: false) { $('div[class="alert alert-danger"]:first-of-type').module ErrorMessages }
     }
