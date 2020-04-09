@@ -37,9 +37,11 @@ class OrderSpec extends BaseSpec {
         orderPage.header.text().contains("SHOPPING-CART SUMMARY")
         // 3. Házi feladat
         when: 'Rákattintok a plusz gombra az első sorban'
-
+        int original = orderPage.summaryFirstRow.quantity
+        orderPage.summaryFirstRow.plusButton.click()
         then: 'A mennyiség 2-re változik'
-
+        waitFor {original != orderPage.summaryFirstRow.quantity}
+        orderPage.summaryFirstRow.quantity == original+1
         when: 'Rákattintok a "Proceed to checkout" gombra'
 
         then: 'Megjelenik az "ADDRESSES" fejlécű oldal'
