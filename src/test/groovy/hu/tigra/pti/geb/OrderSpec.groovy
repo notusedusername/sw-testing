@@ -1,5 +1,6 @@
 package hu.tigra.pti.geb
 
+import hu.tigra.pti.geb.module.Modal
 import hu.tigra.pti.geb.page.MainPage
 import hu.tigra.pti.geb.page.MyAccountPage
 import hu.tigra.pti.geb.page.OrderPage
@@ -26,11 +27,14 @@ class OrderSpec extends BaseSpec {
 
         // Órai feladat
         then: 'Megjelenik a kosár popup és a "Product successfully added to your shopping cart" üzenet'
+        waitFor {mainPage.modal.displayed}
+        mainPage.modal.successfulMessage.text().trim() == "Product successfully added to your shopping cart"
 
         when: 'Rákattintok a "Proceed to checkout" gombra'
-
+        mainPage.modal.goToCart.click()
         then: 'Megjelenik a "SHOPPING-CART SUMMARY" fejlécű oldal'
-
+        def orderPage = waitFor { at OrderPage}
+        orderPage.header.text().contains("SHOPPING-CART SUMMARY")
         // 3. Házi feladat
         when: 'Rákattintok a plusz gombra az első sorban'
 
