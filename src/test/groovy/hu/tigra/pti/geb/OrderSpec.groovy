@@ -3,6 +3,7 @@ package hu.tigra.pti.geb
 import hu.tigra.pti.geb.module.Modal
 import hu.tigra.pti.geb.page.MainPage
 import hu.tigra.pti.geb.page.MyAccountPage
+import hu.tigra.pti.geb.page.OrderConfirmationPage
 import hu.tigra.pti.geb.page.OrderPage
 
 class OrderSpec extends BaseSpec {
@@ -43,23 +44,30 @@ class OrderSpec extends BaseSpec {
         waitFor {original != orderPage.summaryFirstRow.quantity}
         orderPage.summaryFirstRow.quantity == original+1
         when: 'Rákattintok a "Proceed to checkout" gombra'
-
+        orderPage.proceedToCheckout.click()
         then: 'Megjelenik az "ADDRESSES" fejlécű oldal'
-
+        def orderPageAddress = waitFor {at OrderPage}
+        orderPageAddress.header.text() == "ADDRESSES"
         when: 'Rákattintok a "Proceed to checkout" gombra'
-
+        orderPageAddress.proceedToCheckout.click()
         then: 'Megjelenik a "SHIPPING" fejlécű oldal'
-
+        def orderPageShipping = waitFor {at OrderPage}
+        orderPageShipping.header.text() == "SHIPPING"
         when: 'Bepipálom a checkboxot és rákattintok a "Proceed to checkout" gombra'
-
+        orderPageShipping.shippingAgreeTerms.check()
+        orderPageShipping.proceedToCheckout.click()
         then: 'Megjelenik a "PLEASE CHOOSE YOUR PAYMENT METHOD" fejlécű oldal'
-
+        def orderPagePayment = waitFor {at OrderPage}
+        orderPagePayment.header.text() == "PLEASE CHOOSE YOUR PAYMENT METHOD"
         when: 'Kiválasztom a csekk fizetési módot'
-
+        orderPagePayment.paymentCheckButton.click()
         then: 'Megjelenik az "ORDER SUMMARY" fejlécű oldal'
-
+        def orderPageSummary = waitFor {at MainPage}
+        orderPageSummary.header.text() == "ORDER SUMMARY"
         when: 'Rákattintok az "I confirm my order" gombra'
-
+        orderPageSummary.confirmShipping.click()
         then: 'Megjelenik a sikeres rendelés üzenete: "Your order on My Store is complete."'
+        def orderPageSuccess = waitFor {at OrderConfirmationPage}
+        orderPageSuccess.message.text() == "Your order on My Store is complete."
     }
 }
