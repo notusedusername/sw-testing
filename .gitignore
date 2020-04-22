@@ -3,3 +3,8 @@ build/
 target/
 .idea/
 *.iml
+pti_gyakorlat/pti_8_gyakorlat/tools/
+pti_gyakorlat/pti_8_gyakorlat/1.start_sonar.sh
+pti_gyakorlat/pti_8_gyakorlat/2.cmd_coverage.bat
+pti_gyakorlat/pti_8_gyakorlat/3.cmd_calculator.bat
+pti_gyakorlat/pti_8_gyakorlat/PTI_kodelemzes_eszkozok_segitsegevel.pptx
